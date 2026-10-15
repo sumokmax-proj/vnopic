@@ -1,0 +1,9 @@
+{
+  "name": "vnopic — 베트남어 OPIc",
+  "short_name": "vnopic",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FAFAF8",
+  "theme_color": "#FAFAF8",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
