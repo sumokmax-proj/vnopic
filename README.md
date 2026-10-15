@@ -1,32 +1,24 @@
-# Vietnamese OPIc Flashcard App (vnopic)
+# vnopic — 베트남어 OPIc 학습 앱 (리뉴얼)
 
-베트남어 OPIc 시험 준비용 플래시카드 앱. Claude AI로 문장 분석 기능 포함.
-
-## 배경 / 의도
-
-`opic-vn-im`(Supabase 연동 버전) 이전의 초기 버전 — 로컬 데이터 기반으로 빠르게 플래시카드 학습 흐름을 먼저 만들어본 프로토타입.
+> **목표:** 내가 재미있게 베트남어 OPIc을 공부하고 연습할 수 있는 앱
 
 ## 현재 상태
 
-🟢 운영 중이었음 (port 3100) — AWS에서는 종료, 추후 다른 환경에서 이어서 작업 예정
+🟡 **리뉴얼 시작 — 기획 단계**
 
-## 사용 기술
+기존 코드를 모두 비우고 기획부터 새로 시작합니다.
 
-| 항목 | 선택 |
+## 진행 순서
+
+1. **기획** — `docs/PLAN.md` (컨셉, 학습 흐름, 재미 요소, 화면 구성)
+2. **기술 설계** — 스택, 데이터 구조, 배포 방식
+3. **개발** — 단계별 구현
+
+## 참고 자료 (이전 버전)
+
+| 자료 | 위치 |
 |------|------|
-| Frontend | React (Vite) + Tailwind CSS |
-| Backend | Express.js (`server.js`) |
-| AI 분석 | Claude API (백엔드 프록시 경유) |
+| v1 프로토타입 (플래시카드 + AI 분석) | 이 저장소 커밋 `c9aadc5` |
+| v2 (시험 모드, 프로필 맞춤화, Supabase) | `sumokmax-proj/opic-vn-im` |
 
-## 실행 방법
-
-```bash
-npm install
-cp .env.example .env   # ANTHROPIC_API_KEY 입력
-npm run dev             # 프론트엔드 (Vite)
-npm start                # 백엔드 (port 3100)
-```
-
-## 관련 프로젝트
-
-후속 버전인 `opic-vn-im`에서 Supabase 백엔드를 붙여 계속 개발 중.
+재사용 후보: 카드 데이터 32장, 성조 변형 오답 생성 로직(`utils/quiz.js`), 프로필 기반 AI 답안 맞춤화 아이디어
