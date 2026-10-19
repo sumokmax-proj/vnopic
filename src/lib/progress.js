@@ -13,6 +13,7 @@ export function initialState() {
     notes: {}, // 오답노트 { [sid]: { misses, lastLap } }
     history: {}, // 누적 기록 { [sid]: { tries, misses } }
     updatedAt: null,
+    backupAt: null, // 마지막으로 백업 파일을 저장한 시각
   }
 }
 
@@ -61,6 +62,34 @@ export function moveBookmark(state, index, courseLength) {
 }
 
 export const lapMissCount = (state, lap) => (state.lapMisses[lap] ?? []).length
+
+// ── 백업 (내보내기 / 가져오기) ─────────────
+export const markBackedUp = (state) => ({ ...state, backupAt: now() })
+
+export function exportBackup(state) {
+  return JSON.stringify({ app: 'vnopic', exportedAt: now(), progress: state }, null, 2)
+}
+
+const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v)
+
+// 백업 파일 내용을 검사해서 진도 상태로 돌려줌. 문제가 있으면 Error.
+export function parseBackup(text) {
+  let data
+  try {
+    data = JSON.parse(text)
+  } catch {
+    throw new Error('백업 파일을 읽을 수 없어요.')
+  }
+  const p = data?.app === 'vnopic' ? data.progress : null
+  if (!isObj(p)) throw new Error('vnopic 백업 파일이 아니에요.')
+  if (p.version !== VERSION) throw new Error('지원하지 않는 백업 버전이에요.')
+  const valid =
+    Number.isInteger(p.lap) && p.lap >= 1 &&
+    Number.isInteger(p.cursor) && p.cursor >= 0 &&
+    isObj(p.lapMisses) && isObj(p.notes) && isObj(p.history)
+  if (!valid) throw new Error('백업 파일 내용이 올바르지 않아요.')
+  return { ...initialState(), ...p }
+}
 
 // ── 저장 ──────────────────────────────────
 export function load(storage = globalThis.localStorage) {

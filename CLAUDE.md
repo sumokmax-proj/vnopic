@@ -25,12 +25,17 @@ src/
 ├── lib/progress.js       # 진도 상태(순수 함수) + localStorage 저장
 ├── lib/progress.test.js
 ├── components/Assemble.jsx  # 블록 조립 UI
+├── components/Backup.jsx    # 진도 백업 파일 저장/불러오기
 ├── screens/Home.jsx      # 책갈피, 회차 진행, 목차, 오답노트 진입
 ├── screens/Study.jsx     # 코스 학습 / 오답 연습 (mode)
 ├── screens/Notes.jsx     # 오답노트
 ├── App.jsx               # 화면 전환 (라우터 없음, state로 관리)
 └── styles.css
 ```
+
+## 배포
+GitHub Pages. `main`에 푸시하면 `.github/workflows/deploy.yml`이 테스트 → 빌드 → 배포.
+주소: https://sumokmax-proj.github.io/vnopic/ (vite `base: './'`라 하위 경로에서도 동작)
 
 ## 규칙
 - 백엔드 없음. 진도는 localStorage(`vnopic:progress`). 저장 구조를 바꾸면 `version`을 올리고 마이그레이션 작성.

@@ -4,7 +4,7 @@ import Notes from './screens/Notes.jsx'
 import { CourseStudy, ReviewStudy } from './screens/Study.jsx'
 import { COURSE } from './lib/course.js'
 import {
-  load, save, completeCourseSentence, recordResult, startNextLap, moveBookmark,
+  load, save, completeCourseSentence, recordResult, startNextLap, moveBookmark, markBackedUp,
 } from './lib/progress.js'
 
 export default function App() {
@@ -31,6 +31,8 @@ export default function App() {
             setScreen('course')
           }}
           onNotes={() => setScreen('notes')}
+          onExported={() => setState((s) => markBackedUp(s))}
+          onImported={(restored) => setState(restored)}
         />
       )}
       {screen === 'course' && (

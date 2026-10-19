@@ -1,7 +1,8 @@
 import { ANSWERS, ANSWER_BY_ID, COURSE, FIRST_INDEX_OF_ANSWER, TOPICS } from '../lib/course.js'
 import { isLapDone, lapMissCount } from '../lib/progress.js'
+import Backup from '../components/Backup.jsx'
 
-export default function Home({ state, onContinue, onJump, onNotes }) {
+export default function Home({ state, onContinue, onJump, onNotes, onExported, onImported }) {
   const total = COURSE.length
   const lapDone = isLapDone(state, total)
   const current = lapDone ? null : COURSE[state.cursor]
@@ -103,6 +104,8 @@ export default function Home({ state, onContinue, onJump, onNotes }) {
           )
         })}
       </section>
+
+      <Backup state={state} onExported={onExported} onImported={onImported} />
     </div>
   )
 }

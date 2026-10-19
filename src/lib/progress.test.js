@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   initialState, recordResult, completeCourseSentence, isLapDone,
   startNextLap, moveBookmark, lapMissCount, load, save,
+  exportBackup, parseBackup, markBackedUp,
 } from './progress.js'
 import { COURSE, buildCourse, splitBlocks, shuffleBlocks, joinBlocks } from './course.js'
 
@@ -85,5 +86,22 @@ describe('progress', () => {
     const st = memStorage()
     st.setItem('vnopic:progress', '{broken')
     expect(load(st)).toEqual(initialState())
+  })
+})
+
+describe('backup', () => {
+  it('내보낸 백업을 그대로 되살린다', () => {
+    let s = completeCourseSentence(initialState(), '001-1', 2, 10)
+    s = markBackedUp(startNextLap(s))
+    expect(parseBackup(exportBackup(s))).toEqual(s)
+  })
+
+  it('잘못된 파일은 거부한다', () => {
+    expect(() => parseBackup('not json')).toThrow('읽을 수 없어요')
+    expect(() => parseBackup('{"foo":1}')).toThrow('vnopic 백업 파일이 아니에요')
+    const bad = { app: 'vnopic', progress: { ...initialState(), cursor: -1 } }
+    expect(() => parseBackup(JSON.stringify(bad))).toThrow('올바르지 않아요')
+    const old = { app: 'vnopic', progress: { ...initialState(), version: 99 } }
+    expect(() => parseBackup(JSON.stringify(old))).toThrow('버전')
   })
 })

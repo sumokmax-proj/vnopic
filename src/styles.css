@@ -198,3 +198,11 @@ h1, h2, h3, p { margin: 0; }
 .vi { font-size: 1.02rem; line-height: 1.6; }
 .note-item { margin-bottom: 8px; display: flex; flex-direction: column; gap: 2px; }
 .note-meta { font-size: 0.78rem; color: var(--warn); font-weight: 600; }
+
+/* 백업 */
+.backup { margin-top: 18px; display: flex; flex-direction: column; gap: 8px; }
+.backup .section-title { margin-left: 0; }
+.backup-actions { display: flex; gap: 8px; }
+.backup-actions .btn { flex: 1; font-size: 0.9rem; }
+.ok-text { color: var(--good); }
+.err-text { color: var(--bad); }
