@@ -12,11 +12,16 @@ export default function App() {
   const [screen, setScreen] = useState('home') // home | course | notes | review
   const [reviewSids, setReviewSids] = useState([])
 
-  useEffect(() => save(state), [state])
+  // effect는 값을 돌려주면 안 됨 (React가 정리 함수로 호출함) → 항상 중괄호 본문으로
+  useEffect(() => {
+    save(state)
+  }, [state])
   useEffect(() => {
     navigator.storage?.persist?.().catch(() => {})
   }, [])
-  useEffect(() => window.scrollTo(0, 0), [screen])
+  useEffect(() => {
+    window.scrollTo(0, 0) // 최신 Chrome은 Promise를 돌려줌 — 반환하지 말 것
+  }, [screen])
 
   const goHome = () => setScreen('home')
 
