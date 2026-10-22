@@ -86,6 +86,8 @@ describe('progress', () => {
     const st = memStorage()
     st.setItem('vnopic:progress', '{broken')
     expect(load(st)).toEqual(initialState())
+    st.setItem('vnopic:progress', JSON.stringify({ ...initialState(), cursor: 5.5 }))
+    expect(load(st)).toEqual(initialState())
   })
 })
 

@@ -72,6 +72,15 @@ export function exportBackup(state) {
 
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v)
 
+export function isValidProgress(p) {
+  return (
+    isObj(p) && p.version === VERSION &&
+    Number.isInteger(p.lap) && p.lap >= 1 &&
+    Number.isInteger(p.cursor) && p.cursor >= 0 &&
+    isObj(p.lapMisses) && isObj(p.notes) && isObj(p.history)
+  )
+}
+
 // 백업 파일 내용을 검사해서 진도 상태로 돌려줌. 문제가 있으면 Error.
 export function parseBackup(text) {
   let data
@@ -83,11 +92,7 @@ export function parseBackup(text) {
   const p = data?.app === 'vnopic' ? data.progress : null
   if (!isObj(p)) throw new Error('vnopic 백업 파일이 아니에요.')
   if (p.version !== VERSION) throw new Error('지원하지 않는 백업 버전이에요.')
-  const valid =
-    Number.isInteger(p.lap) && p.lap >= 1 &&
-    Number.isInteger(p.cursor) && p.cursor >= 0 &&
-    isObj(p.lapMisses) && isObj(p.notes) && isObj(p.history)
-  if (!valid) throw new Error('백업 파일 내용이 올바르지 않아요.')
+  if (!isValidProgress(p)) throw new Error('백업 파일 내용이 올바르지 않아요.')
   return { ...initialState(), ...p }
 }
 
@@ -97,7 +102,7 @@ export function load(storage = globalThis.localStorage) {
     const raw = storage?.getItem(STORAGE_KEY)
     if (!raw) return initialState()
     const parsed = JSON.parse(raw)
-    if (parsed?.version !== VERSION) return initialState()
+    if (!isValidProgress(parsed)) return initialState()
     return { ...initialState(), ...parsed }
   } catch {
     return initialState()

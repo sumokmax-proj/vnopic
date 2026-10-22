@@ -206,3 +206,15 @@ h1, h2, h3, p { margin: 0; }
 .backup-actions .btn { flex: 1; font-size: 0.9rem; }
 .ok-text { color: var(--good); }
 .err-text { color: var(--bad); }
+
+/* 오류 화면 */
+.error-box {
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-size: 0.75rem;
+  background: var(--bad-bg);
+  color: var(--bad);
+  padding: 12px;
+  border-radius: 12px;
+  margin: 0;
+}
