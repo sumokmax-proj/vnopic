@@ -3,6 +3,7 @@ import Assemble from '../components/Assemble.jsx'
 import { WordChips } from '../components/Words.jsx'
 import { ANSWER_BY_ID, COURSE, SENTENCE_BY_ID } from '../lib/course.js'
 import { isLapDone, lapMissCount } from '../lib/progress.js'
+import { QUESTION_AUDIO } from '../data/audio.js'
 
 function TopBar({ onHome, left, right }) {
   return (
@@ -18,7 +19,7 @@ function AnswerSummary({ answer, missed, onNext, onHome, nextLabel }) {
   return (
     <div className="screen">
       <TopBar onHome={onHome} left={answer.topic} right="답변 전체" />
-      <QuestionCard q={answer.q} />
+      <QuestionCard answer={answer} />
       <p className="muted small">이어서 읽어 보세요. 표시된 문장은 이번에 틀린 문장이에요. 단어를 탭하면 뜻이 나와요.</p>
       <div className="summary">
         {answer.sentences.map((_, i) => {
@@ -38,21 +39,40 @@ function AnswerSummary({ answer, missed, onNext, onHome, nextLabel }) {
   )
 }
 
+// 질문 음성: 음성 파일이 있고, 만들 때의 문장과 지금 문장이 같을 때만
+let player = null
+function playQuestion(id, rate) {
+  player?.pause()
+  player = new Audio(`./audio/q/${id}.mp3`)
+  player.playbackRate = rate
+  player.play().catch(() => {})
+}
+
 // 베트남어 질문을 먼저 읽도록 한국어 해석은 탭해야 펼쳐짐
-function QuestionCard({ q }) {
+function QuestionCard({ answer }) {
+  const { q } = answer
   const [open, setOpen] = useState(false)
+  const hasAudio = QUESTION_AUDIO[answer.id]?.text === q.vi
   return (
-    <button type="button" className="card question" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
-      <p className="q-vi">{q.vi}</p>
-      <p className="muted small">{open ? q.ko : '탭하면 해석 보기'}</p>
-    </button>
+    <div className="card question">
+      <button type="button" className="question-toggle" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
+        <p className="q-vi">{q.vi}</p>
+        <p className="muted small">{open ? q.ko : '탭하면 해석 보기'}</p>
+      </button>
+      {hasAudio && (
+        <div className="q-audio">
+          <button type="button" className="btn audio-btn" onClick={() => playQuestion(answer.id, 1)}>🔊 듣기</button>
+          <button type="button" className="btn audio-btn" onClick={() => playQuestion(answer.id, 0.75)}>🐢 천천히</button>
+        </div>
+      )}
+    </div>
   )
 }
 
 function QuestionHeader({ sentence }) {
   const answer = ANSWER_BY_ID[sentence.answerId]
   // 질문이 바뀌면 다시 접힘
-  return <QuestionCard key={answer.id} q={answer.q} />
+  return <QuestionCard key={answer.id} answer={answer} />
 }
 
 // 코스: 책갈피 위치부터 순서대로
