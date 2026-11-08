@@ -3,6 +3,7 @@ import {
   initialState, recordResult, completeCourseSentence, isLapDone,
   startNextLap, moveBookmark, lapMissCount, load, save,
   exportBackup, parseBackup, markBackedUp, toggleWord,
+  completeHanja, recordHanja, startNextHanjaLap,
 } from './progress.js'
 import { COURSE, buildCourse, splitBlocks, shuffleBlocks, joinBlocks } from './course.js'
 
@@ -121,7 +122,7 @@ describe('words', () => {
     const v1 = { version: 1, lap: 2, cursor: 7, lapMisses: { 1: ['001-1'] }, notes: {}, history: {}, updatedAt: null, backupAt: null }
     st.setItem('vnopic:progress', JSON.stringify(v1))
     const s = load(st)
-    expect(s.version).toBe(2)
+    expect(s.version).toBe(3)
     expect(s.lap).toBe(2)
     expect(s.cursor).toBe(7)
     expect(s.words).toEqual({})
@@ -130,8 +131,41 @@ describe('words', () => {
   it('v1 백업 파일도 불러올 수 있다', () => {
     const v1 = { version: 1, lap: 3, cursor: 0, lapMisses: {}, notes: {}, history: {}, updatedAt: null, backupAt: null }
     const s = parseBackup(JSON.stringify({ app: 'vnopic', progress: v1 }))
-    expect(s.version).toBe(2)
+    expect(s.version).toBe(3)
     expect(s.lap).toBe(3)
     expect(s.words).toEqual({})
+  })
+})
+
+describe('hanja', () => {
+  it('한자 연습은 문장 코스와 별도로 책갈피·오답노트를 가진다', () => {
+    let s = completeHanja(initialState(), 'trình độ', 1, 3)
+    expect(s.hanja.cursor).toBe(1)
+    expect(s.hanja.notes['trình độ']).toBeDefined()
+    expect(s.hanja.lapMisses[1]).toEqual(['trình độ'])
+    expect(s.cursor).toBe(0) // 문장 책갈피는 그대로
+    expect(s.notes).toEqual({})
+    s = recordHanja(s, 'trình độ', 0) // 오답 연습에서 맞힘 → 졸업
+    expect(s.hanja.notes['trình độ']).toBeUndefined()
+    expect(s.hanja.cursor).toBe(1) // 오답 연습은 책갈피를 움직이지 않음
+  })
+
+  it('한자 연습 다음 회차', () => {
+    let s = completeHanja(initialState(), 'a', 0, 1)
+    s = startNextHanjaLap(s)
+    expect(s.hanja.lap).toBe(2)
+    expect(s.hanja.cursor).toBe(0)
+    expect(s.lap).toBe(1)
+  })
+
+  it('v2 저장 데이터는 한자 진도가 빈 v3로 바뀐다 (단어장 유지)', () => {
+    const st = memStorage()
+    const v2 = { version: 2, lap: 1, cursor: 3, lapMisses: {}, notes: {}, history: {}, updatedAt: null, backupAt: null, words: { 'tôi': { text: 'tôi', sid: '001-1', savedAt: 'x' } } }
+    st.setItem('vnopic:progress', JSON.stringify(v2))
+    const s = load(st)
+    expect(s.version).toBe(3)
+    expect(s.cursor).toBe(3)
+    expect(s.words['tôi']).toBeDefined()
+    expect(s.hanja).toEqual(initialState().hanja)
   })
 })

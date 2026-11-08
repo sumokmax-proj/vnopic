@@ -1,14 +1,17 @@
 import { ANSWERS, ANSWER_BY_ID, COURSE, FIRST_INDEX_OF_ANSWER, TOPICS } from '../lib/course.js'
 import { isLapDone, lapMissCount } from '../lib/progress.js'
 import Backup from '../components/Backup.jsx'
+import { QUIZ } from '../lib/hanviet.js'
 
-export default function Home({ state, onContinue, onJump, onNotes, onWords, onExported, onImported }) {
+export default function Home({ state, onContinue, onJump, onNotes, onWords, onHanja, onExported, onImported }) {
   const total = COURSE.length
   const lapDone = isLapDone(state, total)
   const current = lapDone ? null : COURSE[state.cursor]
   const fresh = state.lap === 1 && state.cursor === 0 && Object.keys(state.history).length === 0
   const noteCount = Object.keys(state.notes).length
   const wordCount = Object.keys(state.words).length
+  const hanjaWrong = Object.keys(state.hanja.notes).length
+  const hanjaDone = Math.min(state.hanja.cursor, QUIZ.length)
   const pct = Math.round((state.cursor / total) * 100)
 
   const notesInAnswer = (answerId) =>
@@ -68,6 +71,18 @@ export default function Home({ state, onContinue, onJump, onNotes, onWords, onEx
           </p>
         </div>
         {wordCount > 0 && <span className="chev">›</span>}
+      </section>
+
+      {/* 한자 어휘 */}
+      <section className="card row" onClick={onHanja} role="button">
+        <div>
+          <p className="card-title">漢 한자 어휘</p>
+          <p className="muted small">
+            연습 {state.hanja.lap}회차 {hanjaDone}/{QUIZ.length}
+            {hanjaWrong > 0 && ` · 한자 오답 ${hanjaWrong}개`}
+          </p>
+        </div>
+        <span className="chev">›</span>
       </section>
 
       {pastLaps.length > 0 && (

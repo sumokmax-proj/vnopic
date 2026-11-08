@@ -1,8 +1,10 @@
 import { createContext, useContext } from 'react'
 import { lookup, normalize } from '../lib/glossary.js'
+import { HANVIET_BY_KEY } from '../lib/hanviet.js'
+import { HanjaTag } from './Hanja.jsx'
 
-// 어디서든 블록을 탭하면 뜻 시트를 열 수 있게 하는 컨텍스트
-export const WordContext = createContext({ open: () => {}, words: {} })
+// 어디서든 블록을 탭하면 뜻 시트(open) / 한자 시트(openHanja)를 열 수 있게 하는 컨텍스트
+export const WordContext = createContext({ open: () => {}, openHanja: () => {}, words: {} })
 
 // 탭하면 뜻이 나오는 블록 묶음
 // variant="text": 문장처럼 보임(점선 밑줄) / "block": 조립 완료된 블록 모양
@@ -34,8 +36,13 @@ function Star({ on, onClick, label }) {
 
 // 아래에서 올라오는 뜻 시트
 export function WordSheet({ text, sid, words, onToggle, onClose }) {
+  const { openHanja } = useContext(WordContext)
   const info = lookup(text)
   const toggle = (key, shown) => onToggle({ key, text: shown, sid })
+  // 블록 자체나 그 안의 단어 중 한자어가 있으면 한자 정보 표시
+  const hanja = [...new Set([info.key, ...info.parts.map((p) => p.key)])]
+    .map((k) => HANVIET_BY_KEY[k])
+    .filter(Boolean)
 
   return (
     <div className="sheet-backdrop" onClick={onClose}>
@@ -63,6 +70,21 @@ export function WordSheet({ text, sid, words, onToggle, onClose }) {
                   label={words[p.key] ? '단어장에서 빼기' : '단어장에 저장'}
                 />
               </div>
+            ))}
+          </div>
+        )}
+
+        {hanja.length > 0 && (
+          <div className="sheet-parts">
+            <p className="muted small">漢 한자어</p>
+            {hanja.map((h) => (
+              <button key={h.key} type="button" className="hanja-link" onClick={() => openHanja(h.key)}>
+                <span className="hanja-link-main">
+                  <b>{h.hanja.replaceAll('_', '·')}</b> [{h.reading.replaceAll('_', '·')}] <span className="muted">{h.display}</span>
+                </span>
+                <HanjaTag type={h.type} />
+                <span className="chev">›</span>
+              </button>
             ))}
           </div>
         )}

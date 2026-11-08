@@ -288,3 +288,81 @@ h1, h2, h3, p { margin: 0; }
 .word-ko.hidden { color: var(--muted); font-size: 0.85rem; }
 .word-ex { color: var(--muted); font-size: 0.85rem; }
 .word-ex b { color: var(--text); }
+
+/* 한자 어휘 */
+.htag {
+  display: inline-block; white-space: nowrap;
+  font-size: 0.72rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 999px;
+  background: var(--surface-2); color: var(--muted);
+}
+.htag.diff { background: var(--bad-bg); color: var(--bad); }
+.htag.near, .htag.reversed { background: var(--warn-bg); color: var(--warn); }
+.htag.same { background: var(--good-bg); color: var(--good); }
+
+.hanja-detail { display: flex; flex-direction: column; gap: 10px; }
+.hanja-word { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
+.hanja-word.big .hanja-chars { font-size: 2rem; letter-spacing: 0.08em; font-family: 'Noto Serif KR', 'Batang', serif; }
+.hanja-chars .native { font-size: 1rem; letter-spacing: 0; font-family: inherit; color: var(--muted); }
+.hanja-reading { font-size: 1.1rem; font-weight: 600; }
+.hanja-ko { font-size: 0.9rem; color: var(--warn); font-weight: 600; }
+.hanja-type { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.hanja-note { font-size: 0.9rem; }
+.hanja-meaning { font-size: 1rem; }
+.char-rows { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--border); padding-top: 10px; }
+.char-row { display: flex; flex-direction: column; gap: 2px; }
+.char-big { font-size: 1.3rem; font-family: 'Noto Serif KR', 'Batang', serif; }
+.char-vi { color: var(--accent); font-weight: 600; }
+.link {
+  background: none; border: none; padding: 2px 4px; margin-right: 4px;
+  color: var(--accent); text-decoration: underline; text-underline-offset: 3px;
+  font: inherit; cursor: pointer;
+}
+.hanja-example { background: var(--surface-2); border-radius: 12px; padding: 10px 12px; }
+.hanja-example b { color: var(--accent); }
+
+.hanja-link {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  min-height: 44px; padding: 6px 0;
+  background: none; border: none; text-align: left; cursor: pointer;
+}
+.hanja-link-main { flex: 1; }
+
+.rules summary { cursor: pointer; list-style: none; }
+.rules summary::-webkit-details-marker { display: none; }
+.rules[open] { gap: 8px; }
+.rules-head { font-weight: 700; margin-top: 6px; }
+.rule { font-size: 0.9rem; line-height: 1.5; }
+
+.filters { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+.filter {
+  white-space: nowrap; flex-shrink: 0;
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: 999px; padding: 6px 12px; font-size: 0.85rem; cursor: pointer;
+}
+.filter.on { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+.hanja-item {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  text-align: left; cursor: pointer;
+  padding: 12px 14px; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--border);
+}
+.hanja-item-main { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.hanja-item-sub { color: var(--muted); font-size: 0.85rem; }
+.saved-mark { color: #e0a526; }
+.word-hanja { color: var(--muted); font-weight: 400; font-size: 0.9rem; }
+
+/* 한자 연습문제 */
+.quiz { display: flex; flex-direction: column; gap: 14px; }
+.quiz-prompt { align-items: center; text-align: center; padding: 24px 16px; }
+.quiz-word { font-size: 2rem; font-weight: 700; }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.choice {
+  min-height: 60px; font-size: 1.3rem; font-weight: 600;
+  border-radius: 14px; border: 1px solid var(--border); border-bottom-width: 3px;
+  background: var(--surface); cursor: pointer;
+}
+.choice:disabled { cursor: default; }
+.choice.correct { border-color: var(--good); background: var(--good-bg); color: var(--good); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-bg); color: var(--bad); }
+.choice.dim { opacity: 0.45; }

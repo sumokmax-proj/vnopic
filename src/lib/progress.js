@@ -1,8 +1,13 @@
-// 진도 상태: 책갈피 + 회차 + 오답노트 + 내 단어장
+// 진도 상태: 책갈피 + 회차 + 오답노트 + 내 단어장 + 한자 연습
 // 모든 변경은 순수 함수로 (state → 새 state). 저장은 load/save만 담당.
 
 export const STORAGE_KEY = 'vnopic:progress'
-export const VERSION = 2 // v2: 내 단어장(words) 추가
+export const VERSION = 3 // v2: 내 단어장(words) / v3: 한자 연습 진도(hanja)
+
+// 책갈피·회차·오답노트 묶음. 문장 코스는 state 자체가 이 모양이고, 한자 연습은 state.hanja
+export function initialTrack() {
+  return { lap: 1, cursor: 0, lapMisses: {}, notes: {}, history: {} }
+}
 
 export function initialState() {
   return {
@@ -15,6 +20,7 @@ export function initialState() {
     updatedAt: null,
     backupAt: null, // 마지막으로 백업 파일을 저장한 시각
     words: {}, // 내 단어장 { [key]: { text, sid, savedAt } }
+    hanja: initialTrack(), // 한자 연습 (id = 베트남어 단어)
   }
 }
 
@@ -73,6 +79,14 @@ export function toggleWord(state, { key, text, sid }) {
   return { ...state, words, updatedAt: now() }
 }
 
+// ── 한자 연습 ─────────────────────────────
+// 문장 코스와 같은 규칙(책갈피·회차·오답노트)을 state.hanja에 적용
+const withHanja = (state, fn) => ({ ...state, hanja: fn(state.hanja), updatedAt: now() })
+export const completeHanja = (state, id, mistakes, length) =>
+  withHanja(state, (t) => completeCourseSentence(t, id, mistakes, length))
+export const recordHanja = (state, id, mistakes) => withHanja(state, (t) => recordResult(t, id, mistakes))
+export const startNextHanjaLap = (state) => withHanja(state, startNextLap)
+
 // ── 백업 (내보내기 / 가져오기) ─────────────
 export const markBackedUp = (state) => ({ ...state, backupAt: now() })
 
@@ -82,13 +96,14 @@ export function exportBackup(state) {
 
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v)
 
+const isValidTrack = (t) =>
+  isObj(t) &&
+  Number.isInteger(t.lap) && t.lap >= 1 &&
+  Number.isInteger(t.cursor) && t.cursor >= 0 &&
+  isObj(t.lapMisses) && isObj(t.notes) && isObj(t.history)
+
 export function isValidProgress(p) {
-  return (
-    isObj(p) && p.version === VERSION &&
-    Number.isInteger(p.lap) && p.lap >= 1 &&
-    Number.isInteger(p.cursor) && p.cursor >= 0 &&
-    isObj(p.lapMisses) && isObj(p.notes) && isObj(p.history) && isObj(p.words)
-  )
+  return isObj(p) && p.version === VERSION && isValidTrack(p) && isObj(p.words) && isValidTrack(p.hanja)
 }
 
 // 예전 저장 형식을 현재 버전으로 변환
@@ -96,6 +111,7 @@ export function migrate(p) {
   if (!isObj(p)) return p
   let m = p
   if (m.version === 1) m = { ...m, version: 2, words: {} }
+  if (m.version === 2) m = { ...m, version: 3, hanja: initialTrack() }
   return m
 }
 
