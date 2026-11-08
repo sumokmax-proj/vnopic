@@ -18,10 +18,7 @@ function AnswerSummary({ answer, missed, onNext, onHome, nextLabel }) {
   return (
     <div className="screen">
       <TopBar onHome={onHome} left={answer.topic} right="답변 전체" />
-      <div className="card">
-        <p className="q-vi">{answer.q.vi}</p>
-        <p className="muted small">{answer.q.ko}</p>
-      </div>
+      <QuestionCard q={answer.q} />
       <p className="muted small">이어서 읽어 보세요. 표시된 문장은 이번에 틀린 문장이에요. 단어를 탭하면 뜻이 나와요.</p>
       <div className="summary">
         {answer.sentences.map((_, i) => {
@@ -41,14 +38,21 @@ function AnswerSummary({ answer, missed, onNext, onHome, nextLabel }) {
   )
 }
 
+// 베트남어 질문을 먼저 읽도록 한국어 해석은 탭해야 펼쳐짐
+function QuestionCard({ q }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <button type="button" className="card question" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
+      <p className="q-vi">{q.vi}</p>
+      <p className="muted small">{open ? q.ko : '탭하면 해석 보기'}</p>
+    </button>
+  )
+}
+
 function QuestionHeader({ sentence }) {
   const answer = ANSWER_BY_ID[sentence.answerId]
-  return (
-    <div className="card question">
-      <p className="q-vi">{answer.q.vi}</p>
-      <p className="muted small">{answer.q.ko}</p>
-    </div>
-  )
+  // 질문이 바뀌면 다시 접힘
+  return <QuestionCard key={answer.id} q={answer.q} />
 }
 
 // 코스: 책갈피 위치부터 순서대로
