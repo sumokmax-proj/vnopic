@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Assemble from '../components/Assemble.jsx'
+import { WordChips } from '../components/Words.jsx'
 import { ANSWER_BY_ID, COURSE, SENTENCE_BY_ID } from '../lib/course.js'
 import { isLapDone, lapMissCount } from '../lib/progress.js'
 
@@ -21,13 +22,13 @@ function AnswerSummary({ answer, missed, onNext, onHome, nextLabel }) {
         <p className="q-vi">{answer.q.vi}</p>
         <p className="muted small">{answer.q.ko}</p>
       </div>
-      <p className="muted small">이어서 읽어 보세요. 표시된 문장은 이번에 틀린 문장이에요.</p>
+      <p className="muted small">이어서 읽어 보세요. 표시된 문장은 이번에 틀린 문장이에요. 단어를 탭하면 뜻이 나와요.</p>
       <div className="summary">
         {answer.sentences.map((_, i) => {
           const s = SENTENCE_BY_ID[`${answer.id}-${i + 1}`]
           return (
             <div key={s.sid} className={`summary-line ${missed.has(s.sid) ? 'missed' : ''}`}>
-              <p className="vi">{s.text}</p>
+              <p className="vi"><WordChips blocks={s.blocks} sid={s.sid} /></p>
               <p className="muted small">{s.ko}</p>
             </div>
           )

@@ -2,12 +2,13 @@ import { ANSWERS, ANSWER_BY_ID, COURSE, FIRST_INDEX_OF_ANSWER, TOPICS } from '..
 import { isLapDone, lapMissCount } from '../lib/progress.js'
 import Backup from '../components/Backup.jsx'
 
-export default function Home({ state, onContinue, onJump, onNotes, onExported, onImported }) {
+export default function Home({ state, onContinue, onJump, onNotes, onWords, onExported, onImported }) {
   const total = COURSE.length
   const lapDone = isLapDone(state, total)
   const current = lapDone ? null : COURSE[state.cursor]
   const fresh = state.lap === 1 && state.cursor === 0 && Object.keys(state.history).length === 0
   const noteCount = Object.keys(state.notes).length
+  const wordCount = Object.keys(state.words).length
   const pct = Math.round((state.cursor / total) * 100)
 
   const notesInAnswer = (answerId) =>
@@ -56,6 +57,17 @@ export default function Home({ state, onContinue, onJump, onNotes, onExported, o
           </p>
         </div>
         {noteCount > 0 && <span className="chev">›</span>}
+      </section>
+
+      {/* 내 단어장 */}
+      <section className="card row" onClick={wordCount ? onWords : undefined} role={wordCount ? 'button' : undefined}>
+        <div>
+          <p className="card-title">⭐ 내 단어장</p>
+          <p className="muted small">
+            {wordCount ? `저장한 단어 ${wordCount}개` : '문장 속 단어를 탭하고 ☆를 누르면 여기 모여요.'}
+          </p>
+        </div>
+        {wordCount > 0 && <span className="chev">›</span>}
       </section>
 
       {pastLaps.length > 0 && (

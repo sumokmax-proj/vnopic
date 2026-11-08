@@ -1,8 +1,8 @@
-// 진도 상태: 책갈피 + 회차 + 오답노트
+// 진도 상태: 책갈피 + 회차 + 오답노트 + 내 단어장
 // 모든 변경은 순수 함수로 (state → 새 state). 저장은 load/save만 담당.
 
 export const STORAGE_KEY = 'vnopic:progress'
-export const VERSION = 1
+export const VERSION = 2 // v2: 내 단어장(words) 추가
 
 export function initialState() {
   return {
@@ -14,6 +14,7 @@ export function initialState() {
     history: {}, // 누적 기록 { [sid]: { tries, misses } }
     updatedAt: null,
     backupAt: null, // 마지막으로 백업 파일을 저장한 시각
+    words: {}, // 내 단어장 { [key]: { text, sid, savedAt } }
   }
 }
 
@@ -63,6 +64,15 @@ export function moveBookmark(state, index, courseLength) {
 
 export const lapMissCount = (state, lap) => (state.lapMisses[lap] ?? []).length
 
+// ── 내 단어장 ──────────────────────────────
+// key: 소문자 정규화된 단어, text: 화면에 보일 모양, sid: 저장한 문장(예문)
+export function toggleWord(state, { key, text, sid }) {
+  const words = { ...state.words }
+  if (words[key]) delete words[key]
+  else words[key] = { text, sid: sid ?? null, savedAt: now() }
+  return { ...state, words, updatedAt: now() }
+}
+
 // ── 백업 (내보내기 / 가져오기) ─────────────
 export const markBackedUp = (state) => ({ ...state, backupAt: now() })
 
@@ -77,8 +87,16 @@ export function isValidProgress(p) {
     isObj(p) && p.version === VERSION &&
     Number.isInteger(p.lap) && p.lap >= 1 &&
     Number.isInteger(p.cursor) && p.cursor >= 0 &&
-    isObj(p.lapMisses) && isObj(p.notes) && isObj(p.history)
+    isObj(p.lapMisses) && isObj(p.notes) && isObj(p.history) && isObj(p.words)
   )
+}
+
+// 예전 저장 형식을 현재 버전으로 변환
+export function migrate(p) {
+  if (!isObj(p)) return p
+  let m = p
+  if (m.version === 1) m = { ...m, version: 2, words: {} }
+  return m
 }
 
 // 백업 파일 내용을 검사해서 진도 상태로 돌려줌. 문제가 있으면 Error.
@@ -91,9 +109,10 @@ export function parseBackup(text) {
   }
   const p = data?.app === 'vnopic' ? data.progress : null
   if (!isObj(p)) throw new Error('vnopic 백업 파일이 아니에요.')
-  if (p.version !== VERSION) throw new Error('지원하지 않는 백업 버전이에요.')
-  if (!isValidProgress(p)) throw new Error('백업 파일 내용이 올바르지 않아요.')
-  return { ...initialState(), ...p }
+  const m = migrate(p)
+  if (m.version !== VERSION) throw new Error('지원하지 않는 백업 버전이에요.')
+  if (!isValidProgress(m)) throw new Error('백업 파일 내용이 올바르지 않아요.')
+  return { ...initialState(), ...m }
 }
 
 // ── 저장 ──────────────────────────────────
@@ -101,7 +120,7 @@ export function load(storage = globalThis.localStorage) {
   try {
     const raw = storage?.getItem(STORAGE_KEY)
     if (!raw) return initialState()
-    const parsed = JSON.parse(raw)
+    const parsed = migrate(JSON.parse(raw))
     if (!isValidProgress(parsed)) return initialState()
     return { ...initialState(), ...parsed }
   } catch {

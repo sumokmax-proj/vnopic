@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { shuffleBlocks } from '../lib/course.js'
+import { WordChips } from './Words.jsx'
 
 // 문장 하나 조립. 실수(틀린 탭·힌트·문장 보기) 횟수를 onDone으로 넘김.
 export default function Assemble({ sentence, startWithReading, onDone }) {
@@ -44,8 +45,8 @@ export default function Assemble({ sentence, startWithReading, onDone }) {
     return (
       <div className="assemble">
         <p className="ko-prompt">{sentence.ko}</p>
-        <p className="vi-reading">{sentence.text}</p>
-        <p className="muted small">문장을 소리 내어 한두 번 읽어 보세요.</p>
+        <p className="vi-reading"><WordChips blocks={sentence.blocks} sid={sentence.sid} /></p>
+        <p className="muted small">문장을 소리 내어 한두 번 읽어 보세요. 모르는 단어는 탭하면 뜻이 나와요.</p>
         <div className="actions">
           <button className="btn primary" onClick={() => setPhase('build')}>조립하기</button>
         </div>
@@ -61,9 +62,11 @@ export default function Assemble({ sentence, startWithReading, onDone }) {
 
       <div className={`answer-line ${done ? (mistakes ? 'done' : 'done perfect') : ''}`}>
         {placed.length === 0 && <span className="placeholder">블록을 순서대로 탭하세요</span>}
-        {placed.map((id) => (
-          <span key={id} className="block placed">{byId[id].text}</span>
-        ))}
+        {done ? (
+          <WordChips blocks={sentence.blocks} sid={sentence.sid} variant="block" />
+        ) : (
+          placed.map((id) => <span key={id} className="block placed">{byId[id].text}</span>)
+        )}
       </div>
 
       {peeking && !done && <p className="vi-peek">{sentence.text}</p>}
@@ -99,6 +102,7 @@ export default function Assemble({ sentence, startWithReading, onDone }) {
           ) : (
             <p className="result-msg">실수 {mistakes}번 · 오답노트에 담았어요</p>
           )}
+          <p className="muted small center">블록을 탭하면 단어 뜻을 볼 수 있어요.</p>
           <div className="actions">
             <button className="btn primary" onClick={() => onDone(mistakes)}>다음</button>
           </div>

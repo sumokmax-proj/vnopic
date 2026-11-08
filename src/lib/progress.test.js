@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   initialState, recordResult, completeCourseSentence, isLapDone,
   startNextLap, moveBookmark, lapMissCount, load, save,
-  exportBackup, parseBackup, markBackedUp,
+  exportBackup, parseBackup, markBackedUp, toggleWord,
 } from './progress.js'
 import { COURSE, buildCourse, splitBlocks, shuffleBlocks, joinBlocks } from './course.js'
 
@@ -105,5 +105,33 @@ describe('backup', () => {
     expect(() => parseBackup(JSON.stringify(bad))).toThrow('올바르지 않아요')
     const old = { app: 'vnopic', progress: { ...initialState(), version: 99 } }
     expect(() => parseBackup(JSON.stringify(old))).toThrow('버전')
+  })
+})
+
+describe('words', () => {
+  it('단어 저장/삭제를 토글한다', () => {
+    let s = toggleWord(initialState(), { key: 'công nghệ', text: 'công nghệ', sid: '001-2' })
+    expect(s.words['công nghệ']).toMatchObject({ text: 'công nghệ', sid: '001-2' })
+    s = toggleWord(s, { key: 'công nghệ', text: 'công nghệ', sid: '001-2' })
+    expect(s.words['công nghệ']).toBeUndefined()
+  })
+
+  it('v1 저장 데이터는 단어장이 빈 v2로 바뀐다', () => {
+    const st = memStorage()
+    const v1 = { version: 1, lap: 2, cursor: 7, lapMisses: { 1: ['001-1'] }, notes: {}, history: {}, updatedAt: null, backupAt: null }
+    st.setItem('vnopic:progress', JSON.stringify(v1))
+    const s = load(st)
+    expect(s.version).toBe(2)
+    expect(s.lap).toBe(2)
+    expect(s.cursor).toBe(7)
+    expect(s.words).toEqual({})
+  })
+
+  it('v1 백업 파일도 불러올 수 있다', () => {
+    const v1 = { version: 1, lap: 3, cursor: 0, lapMisses: {}, notes: {}, history: {}, updatedAt: null, backupAt: null }
+    const s = parseBackup(JSON.stringify({ app: 'vnopic', progress: v1 }))
+    expect(s.version).toBe(2)
+    expect(s.lap).toBe(3)
+    expect(s.words).toEqual({})
   })
 })

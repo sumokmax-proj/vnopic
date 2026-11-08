@@ -1,4 +1,5 @@
 import { COURSE, TOPICS } from '../lib/course.js'
+import { WordChips } from '../components/Words.jsx'
 
 export default function Notes({ state, onPractice, onHome }) {
   const items = COURSE.filter((s) => state.notes[s.sid]) // 코스 순서 유지
@@ -27,7 +28,7 @@ export default function Notes({ state, onPractice, onHome }) {
                 <h3 className="section-title">{topic} <span className="weak-badge">{list.length}</span></h3>
                 {list.map((s) => (
                   <div key={s.sid} className="note-item">
-                    <p className="vi">{s.text}</p>
+                    <p className="vi"><WordChips blocks={s.blocks} sid={s.sid} /></p>
                     <p className="muted small">{s.ko}</p>
                     <p className="note-meta">누적 {state.history[s.sid]?.misses ?? 0}번 틀림</p>
                   </div>
