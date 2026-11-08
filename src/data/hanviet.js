@@ -10,7 +10,6 @@ export const ENTRIES = [
   { vi: 'thành viên', hanja: '成員', reading: '성원', type: 'same', note: "한국어에선 보통 '구성원(構成員)'이라고 함" },
   { vi: 'hiện tại', hanja: '現在', reading: '현재', type: 'same' },
   { vi: 'đặc biệt', hanja: '特別', reading: '특별', type: 'same' },
-  { vi: 'cụ thể', hanja: '具體', reading: '구체', type: 'same', note: "한국어 '구체적'처럼 형용사로도 씀" },
   { vi: 'hạnh phúc', hanja: '幸福', reading: '행복', type: 'same' },
   { vi: 'lĩnh vực', hanja: '領域', reading: '영역', type: 'same', note: "한국어 '분야'에 가깝게 씀 (IT 분야 = lĩnh vực IT)" },
   { vi: 'yêu cầu', hanja: '要求', reading: '요구', type: 'same' },
@@ -58,19 +57,17 @@ export const ENTRIES = [
   { vi: 'ứng dụng', hanja: '應用', reading: '응용', type: 'near', note: "'응용' 외에 스마트폰 '앱'이라는 뜻으로 많이 씀" },
   { vi: 'địa điểm', hanja: '地點', reading: '지점', type: 'near', note: "한국어 '지점(위치·지사)'보다 넓게 '장소'" },
   { vi: 'ẩm thực', hanja: '飲食', reading: '음식', type: 'near', note: "한국어 '음식'보다 '요리 문화, 식문화'에 가까움" },
-  { vi: 'trung tâm', hanja: '中心', reading: '중심', type: 'near', note: "'중심' 외에 '센터'(쇼핑센터 등)의 뜻으로도 씀" },
   { vi: 'tình huống', hanja: '情況', reading: '정황', type: 'near', note: "한국어 '정황'은 딱딱한 말. 베트남어는 일상적인 '상황'" },
   { vi: 'thân thiện', hanja: '親善', reading: '친선', type: 'near', note: "한국어 '친선(친선 경기)'과 달리 '친절한, 친근한'" },
   { vi: 'hiệu quả', hanja: '效果', reading: '효과', type: 'near', note: "명사 '효과' 외에 형용사 '효율적인'으로도 씀" },
   { vi: 'cảm giác', hanja: '感覺', reading: '감각', type: 'near', note: "한국어 '감각(sense)'보다 '느낌, 기분'" },
   { vi: 'ngũ cốc', hanja: '五穀', reading: '오곡', type: 'near', note: "'곡물', 아침에 먹는 '시리얼'" },
-  { vi: 'tiện nghi', hanja: '便宜', reading: '편의', type: 'near', note: "'(시설이) 편리한, 편의 시설'. 형용사로 씀" },
   { vi: 'tiện ích', hanja: '便益', reading: '편익', type: 'near', note: "한국어 '편익(benefit)'과 달리 '편의 시설'" },
+  { vi: 'địa phương', hanja: '地方', reading: '지방', type: 'near', note: "한국어 '지방(수도 밖)'보다 '현지, 그 지역'. món ăn địa phương = 현지 음식" },
   { vi: 'thịnh soạn', hanja: '盛饌', reading: '성찬', type: 'near', note: "한국어 '성찬(푸짐한 음식)'처럼 '푸짐한'이라는 형용사로 씀" },
 
   // ⚠️ 뜻 다름
   { vi: 'đồng nghiệp', hanja: '同業', reading: '동업', type: 'diff', note: "한국어 '동업(같이 사업함)'과 달리 '동료'" },
-  { vi: 'công tác', hanja: '工作', reading: '공작', type: 'diff', note: "한국어 '공작(공작원)'과 달리 '업무', chuyến công tác = '출장'" },
   { vi: 'công nghệ', hanja: '工藝', reading: '공예', type: 'diff', note: "한국어 '공예(craft)'와 달리 '기술(technology)'" },
   { vi: 'thông tin', hanja: '通信', reading: '통신', type: 'diff', note: "한국어 '통신'과 달리 '정보'" },
   { vi: 'trình độ', hanja: '程度', reading: '정도', type: 'diff', note: "한국어 '정도(degree)'와 달리 '수준, 실력'" },
@@ -92,7 +89,6 @@ export const ENTRIES = [
   { vi: 'bản ngữ', hanja: '本語', reading: '본어', type: 'viet', note: "본래(本)의 말(語) → '모국어'. người bản ngữ = 원어민" },
   { vi: 'lập trình', hanja: '立程', reading: '입정', type: 'viet', note: "'프로그래밍'. lập trình viên = 프로그래머" },
   { vi: 'khách hàng', hanja: '客行', reading: '객항', type: 'viet', note: "'고객'" },
-  { vi: 'thường xuyên', hanja: '常川', reading: '상천', type: 'viet', note: "늘(常) 흐르는 냇물(川)처럼 → '자주'" },
   { vi: 'tuy nhiên', hanja: '雖然', reading: '수연', type: 'viet', note: "한문의 '雖然(비록 ~이나)' → '그러나'" },
   { vi: 'công ty', hanja: '公司', reading: '공사', type: 'viet', note: "중국어 '公司'에서 온 말 → '회사'" },
   { vi: 'chi tiết', hanja: '枝節', reading: '지절', type: 'viet', note: "가지(枝)와 마디(節) → '세부 사항'" },
@@ -106,12 +102,10 @@ export const ENTRIES = [
   { vi: 'thưởng thức', hanja: '賞識', reading: '상식', type: 'viet', note: "'맛보다, 즐기다'. 한국어 '상식(常識)'과는 한자가 다름" },
   { vi: 'thuận tiện', hanja: '順便', reading: '순편', type: 'viet', note: "'편리한'" },
   { vi: 'siêu thị', hanja: '超市', reading: '초시', type: 'viet', note: "'슈퍼마켓' (超級市場의 준말)" },
-  { vi: 'thành phố', hanja: '城舖', reading: '성포', type: 'viet', note: "성(城)과 가게(舖) → '도시'" },
   { vi: 'dị ứng', hanja: '異應', reading: '이응', type: 'viet', note: "다르게(異) 반응함(應) → '알레르기'" },
   { vi: 'hà nội', hanja: '河內', reading: '하내', type: 'viet', note: "강(河) 안쪽(內) → 하노이" },
 
   // 🔀 일부 고유어
-  { vi: 'phần mềm', hanja: '分_', reading: '분_', type: 'mixed', note: "phần(分, 부분) + mềm(고유어 '부드러운') → 소프트웨어" },
   { vi: 'điểm mạnh', hanja: '點_', reading: '점_', type: 'mixed', note: "điểm(點, 점) + mạnh(고유어 '강한') → 장점" },
   { vi: 'nhà hàng', hanja: '_行', reading: '_항', type: 'mixed', note: "nhà(고유어 '집') + hàng(行, 가게) → 식당" },
 ]
@@ -138,7 +132,7 @@ export const HUN = {
   語: '말씀', 客: '손', 常: '항상', 川: '내', 雖: '비록', 然: '그럴', 公: '공평할', 司: '맡을',
   枝: '가지', 節: '마디', 身: '몸', 接: '이을', 調: '고를', 配: '나눌', 所: '바', 適: '맞을',
   遊: '놀', 遠: '멀', 想: '생각', 棧: '잔도', 賞: '상줄', 識: '알', 順: '순할', 超: '뛰어넘을',
-  市: '저자', 城: '재', 舖: '가게', 異: '다를', 河: '물', 分: '나눌',
+  市: '저자', 方: '모', 城: '재', 舖: '가게', 異: '다를', 河: '물', 分: '나눌',
 }
 
 // 한국 한자음 → 베트남 음 대응 경향 (예시는 대부분 코스 단어)

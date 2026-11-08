@@ -12,7 +12,7 @@ export const ANSWERS = [
     sentences: [
       { ko: '안녕하세요, 제 이름은 Sumok입니다.', vi: 'Xin chào, / tôi / tên là / Sumok.' },
       { ko: '저는 정보기술(IT) 분야의 프로젝트 매니저입니다.', vi: 'Tôi là / một / Project Manager / trong lĩnh vực / công nghệ thông tin.' },
-      { ko: '현재 하노이에 살고 있고, 업무 때문에 서울로 자주 출장을 갑니다.', vi: 'Hiện tại / tôi đang sống / ở Hà Nội / và thường xuyên / có những chuyến công tác / đến Seoul / vì công việc.' },
+      { ko: '현재 아내와 함께 하노이에 살고 있고, 이곳의 IT 회사에서 일하고 있습니다.', vi: 'Hiện tại / tôi đang sống / ở Hà Nội / với vợ / và làm việc / tại một công ty IT / ở đây.' },
       { ko: '베트남어 공부를 정말 좋아하는데, 베트남에 있는 동료들, 친구들과 더 잘 소통하게 해주기 때문입니다.', vi: 'Tôi / rất thích / học tiếng Việt / vì điều này / giúp tôi / giao tiếp tốt hơn / với đồng nghiệp / và những người bạn / ở Việt Nam.' },
     ],
   },
@@ -20,10 +20,10 @@ export const ANSWERS = [
     id: '002', topic: '자기소개',
     q: { vi: 'Bạn bao nhiêu tuổi và gia đình bạn như thế nào?', ko: '몇 살이고 가족은 어떻게 되나요?' },
     sentences: [
-      { ko: '저는 서른 살입니다.', vi: 'Tôi / ba mươi / tuổi.' },
+      { ko: '저는 올해 서른일곱 살입니다.', vi: 'Năm nay / tôi / ba mươi bảy / tuổi.' },
       { ko: '제 가족은 아버지, 어머니, 그리고 여동생 한 명입니다.', vi: 'Gia đình tôi / gồm có / bố, / mẹ, / và / một người / em gái.' },
-      { ko: '제 직업이 IT 프로젝트 매니저라서 현재 하노이에 살고 있습니다.', vi: 'Hiện tại, / tôi đang sống / tại Hà Nội / vì / công việc của tôi / là / một quản lý dự án IT.' },
-      { ko: '가족은 하노이에 있고, 우리는 함께 아주 행복하게 살고 있습니다.', vi: 'Gia đình tôi / ở Hà Nội / và / chúng tôi / sống cùng nhau / rất hạnh phúc.' },
+      { ko: '지금은 하노이에서 아내와 함께 살고 있습니다.', vi: 'Hiện tại, / tôi / sống / tại Hà Nội / cùng với / vợ tôi.' },
+      { ko: '아직 아이는 없지만, 우리는 함께 아주 행복하게 살고 있습니다.', vi: 'Chúng tôi / chưa có / con / nhưng / sống cùng nhau / rất hạnh phúc.' },
     ],
   },
   {
@@ -69,15 +69,15 @@ export const ANSWERS = [
     id: '007', topic: '직장',
     q: { vi: 'Bạn làm nghề gì?', ko: '직업이 무엇인가요?' },
     sentences: [
-      { ko: '저는 소프트웨어 개발자입니다.', vi: 'Tôi là / lập trình viên / phần mềm.' },
-      { ko: '서울의 한 IT 회사에서 일한 지 3년 됐습니다.', vi: 'Tôi / làm việc / tại một công ty công nghệ / ở Seoul / được / ba năm / rồi.' },
+      { ko: '저는 IT 프로젝트 매니저입니다.', vi: 'Tôi là / quản lý dự án / IT.' },
+      { ko: '하노이의 한 IT 회사에서 일한 지 3년 됐습니다.', vi: 'Tôi / làm việc / tại một công ty công nghệ / ở Hà Nội / được / ba năm / rồi.' },
     ],
   },
   {
     id: '008', topic: '직장',
     q: { vi: 'Công việc hàng ngày của bạn là gì?', ko: '매일 하는 업무는 무엇인가요?' },
     sentences: [
-      { ko: '매일 코드를 작성하고, 팀 회의에 참석하고, 동료의 코드를 검토합니다.', vi: 'Hàng ngày / tôi / viết code, / tham gia / cuộc họp nhóm / và / xem xét / code của đồng nghiệp.' },
+      { ko: '매일 프로젝트 일정을 관리하고, 팀 회의에 참석하고, 팀원들의 업무를 검토합니다.', vi: 'Hàng ngày / tôi / quản lý / lịch trình dự án, / tham gia / cuộc họp nhóm / và / xem xét / công việc của các thành viên.' },
       { ko: '가끔은 고객의 요구사항을 이해하려고 고객과 함께 일합니다.', vi: 'Đôi khi / tôi / làm việc / với khách hàng / để hiểu / yêu cầu của họ.' },
     ],
   },
@@ -158,16 +158,16 @@ export const ANSWERS = [
     id: '017', topic: '거주지',
     q: { vi: 'Bạn sống ở đâu?', ko: '어디에 살고 있나요?' },
     sentences: [
-      { ko: '저는 한국 서울에 삽니다.', vi: 'Tôi sống / ở Seoul, / Hàn Quốc.' },
-      { ko: '구체적으로는 마포구이고, 시내 중심과 가깝습니다.', vi: 'Cụ thể là / ở quận Mapo, / gần / trung tâm thành phố.' },
+      { ko: '저는 베트남 하노이에 삽니다.', vi: 'Tôi sống / ở Hà Nội, / Việt Nam.' },
+      { ko: '이곳에서 아내와 단둘이 살고 있습니다.', vi: 'Tôi / sống / ở đây / cùng với / vợ tôi.' },
     ],
   },
   {
     id: '018', topic: '거주지',
     q: { vi: 'Bạn sống trong nhà hay căn hộ?', ko: '단독주택에 사나요, 아파트에 사나요?' },
     sentences: [
-      { ko: '저는 방이 두 개인 작은 아파트에 삽니다.', vi: 'Tôi sống / trong / một căn hộ nhỏ, / có / hai phòng ngủ.' },
-      { ko: '아파트가 아주 크진 않지만 매우 편안하고 편리합니다.', vi: 'Căn hộ / không lớn lắm / nhưng / rất thoải mái / và / tiện nghi.' },
+      { ko: '저는 방이 두 개인 아파트에 삽니다.', vi: 'Tôi sống / trong / một căn hộ / có / hai phòng ngủ.' },
+      { ko: '아파트가 아주 크진 않지만, 베란다가 넓어서 아주 시원합니다.', vi: 'Căn hộ / không lớn lắm / nhưng / có / ban công rộng / nên / rất mát mẻ.' },
     ],
   },
   {
@@ -222,10 +222,10 @@ export const ANSWERS = [
   },
   {
     id: '025', topic: '여행',
-    q: { vi: 'Bạn muốn đến Việt Nam không? Tại sao?', ko: '베트남에 가보고 싶나요? 이유는?' },
+    q: { vi: 'Bạn thích đi du lịch ở đâu tại Việt Nam?', ko: '베트남에서는 어디로 여행 가는 걸 좋아하나요?' },
     sentences: [
-      { ko: '베트남에 정말 가고 싶습니다.', vi: 'Tôi / rất muốn / đến Việt Nam.' },
-      { ko: '진짜 베트남 음식을 맛보고, 그곳의 역사 유적을 둘러보고 싶습니다.', vi: 'Tôi muốn / thưởng thức / ẩm thực Việt Nam / thật sự / và / khám phá / các di tích lịch sử / ở đó.' },
+      { ko: '저는 다낭과 호이안을 정말 좋아합니다.', vi: 'Tôi / rất thích / Đà Nẵng / và / Hội An.' },
+      { ko: '그곳에서는 바다에서 수영도 하고, 현지 음식도 맛보고, 역사 유적도 둘러볼 수 있습니다.', vi: 'Ở đó / tôi có thể / tắm biển, / thưởng thức / món ăn địa phương / và / khám phá / các di tích lịch sử.' },
     ],
   },
   {
@@ -242,8 +242,8 @@ export const ANSWERS = [
     id: '027', topic: '음식',
     q: { vi: 'Bạn thích ăn gì nhất?', ko: '가장 좋아하는 음식이 무엇인가요?' },
     sentences: [
-      { ko: '제가 가장 좋아하는 건 베트남 쌀국수(phở)입니다.', vi: 'Tôi thích nhất / là / món phở / Việt Nam.' },
-      { ko: '향긋하고 맛있는 국물과 부드러운 소고기는 도저히 거부할 수가 없습니다.', vi: 'Nước dùng / thơm ngon / và / thịt bò / mềm / làm tôi / không thể / cưỡng lại được.' },
+      { ko: '제가 가장 좋아하는 건 하노이의 분짜(bún chả)입니다.', vi: 'Tôi thích nhất / là / món bún chả / Hà Nội.' },
+      { ko: '향긋하게 구운 고기와 새콤달콤한 소스는 도저히 거부할 수가 없습니다.', vi: 'Thịt nướng / thơm ngon / và / nước chấm / chua ngọt / làm tôi / không thể / cưỡng lại được.' },
     ],
   },
   {

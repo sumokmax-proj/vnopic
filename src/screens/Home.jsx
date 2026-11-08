@@ -10,7 +10,7 @@ export default function Home({ state, onContinue, onJump, onNotes, onWords, onHa
   const fresh = state.lap === 1 && state.cursor === 0 && Object.keys(state.history).length === 0
   const noteCount = Object.keys(state.notes).length
   const wordCount = Object.keys(state.words).length
-  const hanjaWrong = Object.keys(state.hanja.notes).length
+  const hanjaWrong = QUIZ.filter((q) => state.hanja.notes[q.key]).length // 콘텐츠에서 빠진 단어는 세지 않음
   const hanjaDone = Math.min(state.hanja.cursor, QUIZ.length)
   const pct = Math.round((state.cursor / total) * 100)
 

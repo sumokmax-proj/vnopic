@@ -65,7 +65,7 @@ describe('hanviet lookup', () => {
   it('같은 한자 / 같은 소리 색인', () => {
     expect(CHAR_INDEX['成'].map((h) => h.key)).toEqual(expect.arrayContaining(['thành viên', 'thành công', 'hoàn thành']))
     expect([...SOUND_INDEX['công']]).toEqual(expect.arrayContaining(['工', '公']))
-    expect([...SOUND_INDEX['thành']]).toEqual(expect.arrayContaining(['成', '城']))
+    expect([...SOUND_INDEX['tập']]).toEqual(expect.arrayContaining(['集', '習']))
   })
 
   it('보기는 정답 포함 서로 다른 4개', () => {
