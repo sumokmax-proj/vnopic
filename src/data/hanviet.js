@@ -43,13 +43,13 @@ export const ENTRIES = [
   { vi: 'thành công', hanja: '成功', reading: '성공', type: 'same' },
   { vi: 'thời gian', hanja: '時間', reading: '시간', type: 'same' },
   { vi: 'luyện tập', hanja: '練習', reading: '연습', type: 'same' },
+  { vi: 'hợp lý', hanja: '合理', reading: '합리', type: 'same', note: "한국어 '합리적'처럼 형용사로 씀" },
   { vi: 'tính cách', hanja: '性格', reading: '성격', type: 'same' },
   { vi: 'chuẩn bị', hanja: '準備', reading: '준비', type: 'same' },
   { vi: 'khu vực', hanja: '區域', reading: '구역', type: 'same', note: "'지역'의 뜻으로 자주 씀" },
   { vi: 'việt nam', hanja: '越南', reading: '월남', type: 'same', note: "한국에서도 예전에 베트남을 '월남'이라 불렀음" },
   { vi: 'hàn quốc', hanja: '韓國', reading: '한국', type: 'same' },
   { vi: 'nhật bản', hanja: '日本', reading: '일본', type: 'same' },
-  { vi: 'đài loan', hanja: '臺灣', reading: '대만', type: 'same' },
 
   // 🟡 쓰임 차이
   { vi: 'gia đình', hanja: '家庭', reading: '가정', type: 'near', note: "한국어 '가정(home)'보다 '가족(family)'의 뜻으로 씀" },
@@ -89,7 +89,6 @@ export const ENTRIES = [
   { vi: 'bản ngữ', hanja: '本語', reading: '본어', type: 'viet', note: "본래(本)의 말(語) → '모국어'. người bản ngữ = 원어민" },
   { vi: 'lập trình', hanja: '立程', reading: '입정', type: 'viet', note: "'프로그래밍'. lập trình viên = 프로그래머" },
   { vi: 'khách hàng', hanja: '客行', reading: '객항', type: 'viet', note: "'고객'" },
-  { vi: 'tuy nhiên', hanja: '雖然', reading: '수연', type: 'viet', note: "한문의 '雖然(비록 ~이나)' → '그러나'" },
   { vi: 'công ty', hanja: '公司', reading: '공사', type: 'viet', note: "중국어 '公司'에서 온 말 → '회사'" },
   { vi: 'chi tiết', hanja: '枝節', reading: '지절', type: 'viet', note: "가지(枝)와 마디(節) → '세부 사항'" },
   { vi: 'bản thân', hanja: '本身', reading: '본신', type: 'viet', note: "'자기 자신'. phát triển bản thân = 자기계발" },
@@ -102,7 +101,6 @@ export const ENTRIES = [
   { vi: 'thưởng thức', hanja: '賞識', reading: '상식', type: 'viet', note: "'맛보다, 즐기다'. 한국어 '상식(常識)'과는 한자가 다름" },
   { vi: 'thuận tiện', hanja: '順便', reading: '순편', type: 'viet', note: "'편리한'" },
   { vi: 'siêu thị', hanja: '超市', reading: '초시', type: 'viet', note: "'슈퍼마켓' (超級市場의 준말)" },
-  { vi: 'dị ứng', hanja: '異應', reading: '이응', type: 'viet', note: "다르게(異) 반응함(應) → '알레르기'" },
   { vi: 'hà nội', hanja: '河內', reading: '하내', type: 'viet', note: "강(河) 안쪽(內) → 하노이" },
 
   // 🔀 일부 고유어
@@ -132,7 +130,7 @@ export const HUN = {
   語: '말씀', 客: '손', 常: '항상', 川: '내', 雖: '비록', 然: '그럴', 公: '공평할', 司: '맡을',
   枝: '가지', 節: '마디', 身: '몸', 接: '이을', 調: '고를', 配: '나눌', 所: '바', 適: '맞을',
   遊: '놀', 遠: '멀', 想: '생각', 棧: '잔도', 賞: '상줄', 識: '알', 順: '순할', 超: '뛰어넘을',
-  市: '저자', 方: '모', 城: '재', 舖: '가게', 異: '다를', 河: '물', 分: '나눌',
+  市: '저자', 方: '모', 合: '합할', 城: '재', 舖: '가게', 異: '다를', 河: '물', 分: '나눌',
 }
 
 // 한국 한자음 → 베트남 음 대응 경향 (예시는 대부분 코스 단어)

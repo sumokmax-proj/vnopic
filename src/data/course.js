@@ -30,7 +30,7 @@ export const ANSWERS = [
     id: '003', topic: '자기소개',
     q: { vi: 'Bạn đang học tiếng Việt được bao lâu rồi?', ko: '베트남어를 배운 지 얼마나 됐나요?' },
     sentences: [
-      { ko: '베트남어를 배운 지 약 6개월 됐습니다.', vi: 'Tôi / đã học / tiếng Việt / được / khoảng / sáu tháng / rồi.' },
+      { ko: '베트남어를 배운 지 1년 됐습니다.', vi: 'Tôi / đã học / tiếng Việt / được / một năm / rồi.' },
       { ko: '하노이에서 IT 프로젝트 매니저로 일하고 있어서, 매일 동료들과 베트남어로 말해야 합니다.', vi: 'Vì / công việc của tôi / là IT Project Manager / ở Hà Nội, / tôi cần phải / nói tiếng Việt / với đồng nghiệp / hàng ngày.' },
       { ko: '매일 온라인으로 공부하고, 실력을 늘리려고 원어민과 말하기 연습을 하려고 노력합니다.', vi: 'Tôi / học online / mỗi ngày / và cố gắng / tập nói / với người bản ngữ / để cải thiện / kỹ năng của mình.' },
     ],
@@ -70,7 +70,7 @@ export const ANSWERS = [
     q: { vi: 'Bạn làm nghề gì?', ko: '직업이 무엇인가요?' },
     sentences: [
       { ko: '저는 IT 프로젝트 매니저입니다.', vi: 'Tôi là / quản lý dự án / IT.' },
-      { ko: '하노이의 한 IT 회사에서 일한 지 3년 됐습니다.', vi: 'Tôi / làm việc / tại một công ty công nghệ / ở Hà Nội / được / ba năm / rồi.' },
+      { ko: '하노이의 한 IT 회사에서 일한 지 1년 됐습니다.', vi: 'Tôi / làm việc / tại một công ty công nghệ / ở Hà Nội / được / một năm / rồi.' },
     ],
   },
   {
@@ -85,7 +85,7 @@ export const ANSWERS = [
     id: '009', topic: '직장',
     q: { vi: 'Bạn làm việc với bao nhiêu người?', ko: '몇 명과 함께 일하나요?' },
     sentences: [
-      { ko: '저희 팀은 10명입니다.', vi: 'Nhóm tôi / có / mười người.' },
+      { ko: '저희 팀은 30명 정도입니다.', vi: 'Nhóm tôi / có / khoảng / ba mươi người.' },
       { ko: '우리는 보통 메신저 앱과 온라인 회의로 소통합니다.', vi: 'Chúng tôi / thường / trao đổi / qua ứng dụng nhắn tin / và / họp trực tuyến.' },
     ],
   },
@@ -175,7 +175,7 @@ export const ANSWERS = [
     q: { vi: 'Khu vực bạn sống có những tiện ích gì?', ko: '사는 지역에 어떤 편의시설이 있나요?' },
     sentences: [
       { ko: '집 근처에 슈퍼마켓, 병원, 그리고 식당이 많이 있습니다.', vi: 'Gần nhà tôi / có / siêu thị, / bệnh viện, / và / nhiều nhà hàng.' },
-      { ko: '지하철역도 걸어서 5분밖에 안 걸립니다.', vi: 'Ga tàu điện ngầm / cũng / chỉ cách / năm phút / đi bộ.' },
+      { ko: '출근도 편한데, 언제든지 그랩 오토바이 택시를 부를 수 있기 때문입니다.', vi: 'Đi làm / cũng / rất tiện / vì / tôi / có thể / gọi / xe ôm Grab / bất cứ lúc nào.' },
     ],
   },
   {
@@ -183,7 +183,7 @@ export const ANSWERS = [
     q: { vi: 'Bạn có thích nơi bạn đang sống không? Tại sao?', ko: '현재 사는 곳이 마음에 드나요? 이유는?' },
     sentences: [
       { ko: '교통이 편리하고 녹지 공간이 많아서 이곳이 정말 좋습니다.', vi: 'Tôi / rất thích / nơi này / vì / giao thông / thuận tiện / và / có nhiều / không gian xanh.' },
-      { ko: '하지만 집세가 조금 비쌉니다.', vi: 'Tuy nhiên, / giá thuê nhà / hơi đắt.' },
+      { ko: '게다가 집세도 꽤 합리적입니다.', vi: 'Hơn nữa, / giá thuê nhà / cũng / khá / hợp lý.' },
     ],
   },
   {
@@ -208,7 +208,7 @@ export const ANSWERS = [
     id: '023', topic: '여행',
     q: { vi: 'Bạn đã đến những nước nào rồi?', ko: '어떤 나라들을 가봤나요?' },
     sentences: [
-      { ko: '저는 일본, 태국, 대만에 가봤습니다.', vi: 'Tôi / đã đến / Nhật Bản, / Thái Lan / và / Đài Loan.' },
+      { ko: '저는 일본과 호주에 가봤습니다.', vi: 'Tôi / đã đến / Nhật Bản / và / Úc.' },
       { ko: '곳마다 문화와 음식이 아주 다르고 흥미롭습니다.', vi: 'Mỗi nơi / có / văn hóa / và / ẩm thực / rất khác nhau / và / thú vị.' },
     ],
   },
@@ -274,8 +274,8 @@ export const ANSWERS = [
     id: '031', topic: '음식',
     q: { vi: 'Bạn có kiêng ăn gì không?', ko: '못 먹는 음식이 있나요?' },
     sentences: [
-      { ko: '가벼운 알레르기가 있어서 해산물을 못 먹습니다.', vi: 'Tôi / không ăn được / hải sản / vì / bị / dị ứng nhẹ.' },
-      { ko: '그 외에는 거의 다 먹을 수 있고, 별로 가리지 않습니다.', vi: 'Ngoài ra / tôi / ăn được / hầu hết mọi thứ / và / không kén chọn / lắm.' },
+      { ko: '해산물을 포함해서 가리는 음식이 하나도 없습니다.', vi: 'Tôi / không / kiêng / món gì cả, / kể cả / hải sản.' },
+      { ko: '거의 다 먹을 수 있고, 별로 까다롭지 않습니다.', vi: 'Tôi / ăn được / hầu hết mọi thứ / và / không kén chọn / lắm.' },
     ],
   },
   {
