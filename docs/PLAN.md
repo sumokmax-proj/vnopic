@@ -53,8 +53,8 @@
 **질문 카드**: 베트남어 질문만 보이고, 한국어 해석은 질문을 탭해야 펼쳐짐 (베트남어 질문을 먼저 읽게 하려고). 다음 질문으로 넘어가면 다시 접힘
 
 **질문 듣기**: 질문 카드에 🔊 듣기 / 🐢 천천히(0.75배) 버튼
-- 음성은 Google Cloud Text-to-Speech로 **미리 mp3 파일을 만들어** 앱에 포함 (`public/audio/q/<답변id>.mp3`). 앱 사용 중에는 API 호출·비용 없음
-- 생성: `node scripts/gen-question-audio.mjs` (질문 문장이 바뀐 것만 다시 만듦). 키는 클라우드 환경의 네트워크 시크릿(texttospeech.googleapis.com, `X-Goog-Api-Key`)
+- 음성은 ElevenLabs(무료 플랜, 카드 불필요)로 **미리 mp3 파일을 만들어** 앱에 포함 (`public/audio/q/<답변id>.mp3`). 앱 사용 중에는 API 호출·비용 없음
+- 생성: `node scripts/gen-question-audio.mjs` (질문 문장이 바뀐 것만 다시 만듦). 키는 클라우드 환경에 저장 (api.elevenlabs.io, `xi-api-key`). 구글은 카드 등록이 필요해서 제외
 - 기본 목소리: 여성, 북부(하노이) 발음. 범위: 질문만 (사용자 결정)
 - 음성 파일이 없거나 문장이 바뀌어 맞지 않으면 버튼을 숨김
 
