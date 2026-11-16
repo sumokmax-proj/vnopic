@@ -45,6 +45,13 @@ src/
 └── styles.css
 ```
 
+## 질문 음성
+`public/audio/q/<답변id>.mp3` + `src/data/audio.js`(자동 생성). 질문 문장을 바꾸면 다시 생성:
+```bash
+NODE_USE_ENV_PROXY=1 ELEVENLABS_API_KEY=proxy-injected node scripts/gen-question-audio.mjs --voice XrExE9yKIg1WjnnlVkGX --model eleven_v3
+```
+(클라우드 환경 "vnopic"에 ElevenLabs 키가 저장돼 있어 프록시가 넣어줌. 바뀐 질문만 다시 만듦)
+
 ## 배포
 GitHub Pages. `main`에 푸시하면 `.github/workflows/deploy.yml`이 테스트 → 빌드 → 배포.
 주소: https://sumokmax-proj.github.io/vnopic/ (vite `base: './'`라 하위 경로에서도 동작)
